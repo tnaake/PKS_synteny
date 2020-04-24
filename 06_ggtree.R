@@ -27,11 +27,11 @@ names(inds_attr) <- tipLabel
 ## get cluster from "classification_community_apclust_dist"
 cluster <- lapply(inds_attr, function(x) 
     paste(unique(attr[x, "classification_community_apclust_dist"]), collapse = "/"))
-## set cluster to "not" if not in 2,3,5 (but not if it is NA)
-cluster24515 <- lapply(cluster, function(x) ifelse(x == "NA", x, 
+## set cluster to "not" if not in 2,4,5,14 (but not if it is NA)
+cluster24514 <- lapply(cluster, function(x) ifelse(x == "NA", x, 
     ifelse(x %in% c("2", "4", "5", "14"), x, "not")))
 cluster <- unlist(cluster)
-cluster24515 <- unlist(cluster24515)
+cluster24514 <- unlist(cluster24514)
 
 
 ## find indices in pks_genes that match to tipLabel (gives row indices in 
@@ -67,7 +67,7 @@ p <- p + geom_tiplab(aes(angle = angle), size = 0.2) +
     #theme(legend.position="right") + 
     scale_color_continuous(low="red", high="green") 
 
-phenotype <- data.frame(cluster = cluster, cluster24515 = cluster24515, 
+phenotype <- data.frame(cluster = cluster, cluster24514 = cluster24514, 
     is = pPAP, exon = numberexon, class = class, unranked = unranked, 
     order = Order, family = family)
 rownames(phenotype) <- tree@phylo$tip.label
