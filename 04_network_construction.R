@@ -696,8 +696,9 @@ plot(net, vertex.label.cex = 0.1, vertex.size = 5,
      vertex.color = reliability[inds_keep], edge.arrow.size = 0.1)
 
 ## plot type of links 
-df <- data.frame(names = names(unlist(sort(table(mat_type_cut)[-1]))), 
-    value = as.vector(sort(table(mat_type_cut)[-1])))
+df <- data.frame(
+    names = names(unlist(sort(table(mat_type_cut[lower.tri(mat_type_cut)])[-1]))), 
+    value = as.vector(sort(table(mat_type_cut[lower.tri(mat_type_cut)])[-1])))
 df$names <- factor(df$names, levels = df$names[order(df$value)])
 g <- ggplot(df) + geom_bar(aes(x = names, y = value), stat = "identity") + 
     theme_bw() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
